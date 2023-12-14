@@ -1,3 +1,4 @@
+#Step 1: Object Masking
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,14 +9,14 @@ def load_image(image_path):
 def convert_to_grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-def apply_threshold(image, threshold_value=100, max_value=255, threshold_type=cv2.THRESH_BINARY):
+def apply_threshold(image, threshold_value=120, max_value=255, threshold_type=cv2.THRESH_BINARY):
     _, thresholded_image = cv2.threshold(image, threshold_value, max_value, threshold_type)
     return thresholded_image
 
-def apply_canny_edge_detection(image, threshold1=30, threshold2=100):
+def apply_canny_edge_detection(image, threshold1=50, threshold2=150):
     return cv2.Canny(image, threshold1, threshold2)
 
-def filter_contours(contours, min_area=1000):
+def filter_contours(contours, min_area=1):
     return [contour for contour in contours if cv2.contourArea(contour) > min_area]
 
 def create_blank_mask(image):
@@ -48,3 +49,6 @@ extracted_image = extract_image_with_mask(original_image, mask)
 
 # Display the results
 display_images(original_image, extracted_image)
+
+#Step 2: YOLO v8 Training
+
